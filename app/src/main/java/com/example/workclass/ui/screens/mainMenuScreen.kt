@@ -13,7 +13,7 @@ import java.lang.reflect.Modifier
 fun MainMenuScreen(navController: NavHostController){
     Column(
         modifier = androidx.compose.ui.Modifier
-            .padding(10.dp)
+            .padding(20.dp)
             .fillMaxSize()
     ){
         Text("Main menu")
