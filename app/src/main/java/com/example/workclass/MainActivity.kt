@@ -39,6 +39,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.workclass.ui.screens.MainMenuScreen
+import com.example.workclass.ui.screens.HomeScreen
+import com.example.workclass.ui.screens.TestScreen
 import com.example.workclass.ui.theme.WorkClassTheme
 import org.apache.tools.ant.types.resources.StringResource
 import org.intellij.lang.annotations.JdkConstants.FontStyle
@@ -53,141 +55,25 @@ class MainActivity : ComponentActivity() {
             WorkClassTheme {
                 ComposableMultiScreenApp()
                 /*
-                Column(){
-                    TextComposable("Alonso")
-                    TextComposable()
-                    TextComposable()
-                    TextComposable()
-                }
-                Row(){
-                    TextComposable()
-                    TextComposable()
-                    TextComposable()
-                    TextComposable()
-                }
-                Column(){
-                    ModifierExample2()
-                    ModifierExample4()
-                    CustomText()
-                    picture()
-                }*/
+                */
             }
         }
     }
-    @Preview(showBackground = true)
+
+
     @Composable
-    fun TextComposable(name:String = "Empty"){
-        Text("Welcome")
-        Text(name)
+    fun ComposableMultiScreenApp() {
+        val navController = rememberNavController()
+        SetupNavGraph(navController = navController)
     }
-    @Preview(showBackground = true)
+
     @Composable
-    fun ModifierExample1(){
-        Column(
-            modifier = Modifier
-                .padding(24.dp,10.dp,20.dp,10.dp)
-        ){
-            Text("Hello world")
+    fun SetupNavGraph(navController: NavHostController) {
+        NavHost(navController = navController, startDestination = "home screen") {
+            composable("main menu") { MainMenuScreen(navController) }
+            composable("home screen") { HomeScreen(navController) }
+            composable("test screen") { TestScreen(navController) }
         }
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun ModifierExample2(){
-        Column(
-            modifier = Modifier
-                .padding(24.dp)
-                .fillMaxWidth()
-                .clickable (onClick = {clickAction()})
-        ){
-            Text("Hello world")
-        }
-    }
-
-    fun clickAction(){
-        println("Column Clicked")
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun ModifierExample3(){
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .background(Color.Blue)
-                .border(width = 5.dp, color = Color.Gray)
-                .width(20.dp),
-            horizontalAlignment =  Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
-        ){
-            TextComposable()
-            TextComposable()
-            TextComposable()
-            TextComposable()
-        }
-    }
-    @Preview(showBackground = true)
-    @Composable
-    fun ModifierExample4(){
-        Box(modifier = Modifier
-            .padding(15.dp)
-            .height(300.dp)
-            .width(300.dp)
-        ){
-
-        }
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun CustomText(){
-        Column(){
-            Text(
-                stringResource(R.string.sample_text),
-                color = colorResource(R.color.purple_200),
-                fontSize = 20.sp,
-                fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
-                fontWeight = FontWeight.ExtraBold
-            )
-            val gradientColors = listOf(Color.Cyan, Color.Green, Color.Magenta)
-            Text(
-                stringResource(R.string.sample_text),
-                style = TextStyle(brush = Brush.linearGradient(colors = gradientColors))
-            )
-        }
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun picture(){
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Black)
-                .height(300.dp)
-        ){
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                painter = painterResource(R.drawable.logoandroid),
-                contentDescription = "Logo Android",
-                contentScale = ContentScale.FillHeight
-            )
-        }
-    }
-}
-
-@Composable
-fun ComposableMultiScreenApp(){
-    val navController = rememberNavController()
-    SetupNavGraph(navController = navController)
-}
-
-@Composable
-fun SetupNavGraph(navController: NavHostController){
-    NavHost(navController = navController, startDestination = "main menu"){
-        composable("main menu"){MainMenuScreen(navController)}
     }
 }
 
