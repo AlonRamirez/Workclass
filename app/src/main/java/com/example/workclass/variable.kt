@@ -20,7 +20,6 @@ fun main(){
     println(age)
     println("Welcome $name, to your first Kotlin project")
     print(add())
-    println(product(5,8))
     printArray(names)
 
 
@@ -34,7 +33,7 @@ fun add():Int{
 }
 
 fun printArray(names:Array<String>){
-    printlnd(names)
+    print(names)
     for(name in names){
         println("Hello $name")
     }
