@@ -33,8 +33,13 @@ fun add():Int{
 }
 
 fun printArray(names:Array<String>){
+    println(names)
     print(names)
     for(name in names){
         println("Hello $name")
     }
+}
+
+fun product(x:Int,y:Int):Int{
+    return (x*y)
 }
