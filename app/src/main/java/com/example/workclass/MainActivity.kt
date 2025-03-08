@@ -38,8 +38,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.workclass.screens.ComponentScreen
 import com.example.workclass.screens.MainMenuScreen
 import com.example.workclass.screens.HomeScreen
+import com.example.workclass.screens.ModelScreen
 import com.example.workclass.screens.TestScreen
 import com.example.workclass.ui.theme.WorkClassTheme
 import org.intellij.lang.annotations.JdkConstants.FontStyle
@@ -185,6 +187,8 @@ class MainActivity : ComponentActivity() {
                 composable("main menu") { MainMenuScreen(navController) }
                 composable("home screen") { HomeScreen(navController) }
                 composable("test screen") { TestScreen(navController) }
+                composable("model screen"){ ModelScreen(navController) }
+                composable("component screen") { ComponentScreen(navController) }
             }
         }
 
