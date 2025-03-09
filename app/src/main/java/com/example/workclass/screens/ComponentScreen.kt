@@ -81,6 +81,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.workclass.R
 import com.example.workclass.data.model.MenuModel
 import com.example.workclass.data.model.PostCardModel
 import com.example.workclass.ui.theme.components.PostCardComponent
@@ -88,17 +89,21 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ComponentScreen(navController: NavHostController){
-    //Buttons() //Function to display different types of buttons
-    //FloatingButtons() //Function to display floating action buttons
-    //Progress() //Function to show progress indicators
-    //Chips() //Function to display chip components
-    //Sliders() //Function to display chip components
-    //Switches() //Function to display switches and checkboxes
-    //Badges()
-    //SnackBars()
-    //AlertDialogs()
 
-    var option by rememberSaveable { mutableStateOf("") }
+    val menuOptions = arrayOf(
+        MenuModel(1,"Buttons","buttons",Icons.Filled.Home),
+        MenuModel(2,"Floating Buttons","Floating buttons",Icons.Filled.AccountBox),
+        MenuModel(3,"Progress","progress",Icons.Filled.Star),
+        MenuModel(4,"Chips","chips",Icons.Filled.Check),
+        MenuModel(5,"Sliders","sliders",Icons.Filled.AddCircle),
+        MenuModel(6,"Switches","switches",Icons.Filled.Warning),
+        MenuModel(7,"Badges","badges",Icons.Filled.Info),
+        MenuModel(8,"SnackBars","snack bars",Icons.Filled.Delete),
+        MenuModel(9,"AlertDialogs","buttons",Icons.Filled.Info),
+        MenuModel(10,"Bars","bars",Icons.Filled.Info)
+    )
+
+    var option by rememberSaveable { mutableStateOf("bars") }
     var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     var scope = rememberCoroutineScope()
 
@@ -106,171 +111,73 @@ fun ComponentScreen(navController: NavHostController){
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                Text("Menú",modifier = Modifier.padding(16.dp))
+                Text("Menu",modifier = Modifier.padding(16.dp))
                 HorizontalDivider()
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = {Text("First menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "Buttons"
-                        scope.launch{
-                            drawerState.apply {
-                                close()
+                LazyColumn {
+                    items(menuOptions){item ->
+                        NavigationDrawerItem(
+                            icon = {Icon(item.icon, contentDescription = "")},
+                            label = {Text(item.title)},
+                            selected = false,
+                            onClick = {
+                                option = item.option
+                                scope.launch {
+                                    drawerState.apply {
+                                        close()
+                                    }
+                                }
                             }
-                        }
+                        )
                     }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.Notifications,contentDescription = "item")},
-                    label = {Text("Second menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "FloatingButtons"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item")},
-                    label = {Text("Third menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "Progress"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item")},
-                    label = {Text("Fourth menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "Chips"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item")},
-                    label = {Text("Fifth menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "Sliders"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item")},
-                    label = {Text("Sixth menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "Switches"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item")},
-                    label = {Text("Seventh menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "Badges"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item")},
-                    label = {Text("Eight menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "SnackBars"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
-                NavigationDrawerItem(
-                    icon = {Icon(Icons.Filled.ShoppingCart, contentDescription = "item")},
-                    label = {Text("Nine menú item")},
-                    selected = false,
-                    onClick = {
-                        option = "AlertDialogs"
-                        scope.launch{
-                            drawerState.apply{
-                                close()
-                            }
-                        }
-                    }
-                )
-
+                }
             }
         }
     ) {
         Column {
-            when(option){
-                "Buttons"->{
+            when(option) {
+                "Buttons" -> {
                     Buttons()
                 }
-                "FloatingButtons"->{
+
+                "FloatingButtons" -> {
                     FloatingButtons()
                 }
-                "Progress"->{
+
+                "Progress" -> {
                     Progress()
                 }
-                "Chips"->{
+
+                "Chips" -> {
                     Chips()
                 }
-                "Sliders"->{
+
+                "Sliders" -> {
                     Sliders()
                 }
-                "Switches"->{
+
+                "Switches" -> {
                     Switches()
                 }
-                "Badges"->{
+
+                "Badges" -> {
                     Badges()
                 }
-                "SnackBars"->{
+
+                "SnackBars" -> {
                     SnackBars()
                 }
-                "AlertDialogs"->{
+
+                "AlertDialogs" -> {
                     AlertDialogs()
+                }
+
+                "bars"->{
+                    Bars()
                 }
             }
         }
     }
 }
-
 @Composable
 fun Buttons(){
    //This function displays various types of Material Design buttons.
@@ -541,6 +448,83 @@ fun AlertDialogs(){
             Text(text = "Borrar Archivo")
         }
         Text(selectedOption)
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Bars(){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        TopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.Black,
+                titleContentColor = Color.White
+            ),
+            title = { Text("Screen title") },
+            actions = {
+                IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Filled.Search, contentDescription = "Search button")
+                }
+                IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Filled.Settings, contentDescription = "Search button")
+                }
+            }
+        )
+
+        val arrayPost = arrayOf(
+            PostCardModel(1,"Title 1","Text 1", R.drawable.logoandroid),
+            PostCardModel(2,"Title 2","Text 2", R.drawable.logoandroid),
+            PostCardModel(3,"Title 3","Text 3", R.drawable.logoandroid)
+        )
+
+        LazyColumn (
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+        ){
+            items(arrayPost){ item ->
+                PostCardComponent(item.id,item.title,item.text,item.image)
+            }
+        }
+
+        BottomAppBar(
+            containerColor = Color.Green,
+            contentColor = Color.Magenta
+        ) {
+            IconButton(
+                modifier = Modifier.weight(1f),
+                onClick = {},
+            ){
+                Icon(imageVector = Icons.Filled.Info, contentDescription = "")
+            }
+            IconButton(
+                modifier = Modifier.weight(1f),
+                onClick = {},
+            ){
+                Icon(imageVector = Icons.Filled.Lock, contentDescription = "")
+            }
+            IconButton(
+                modifier = Modifier.weight(1f),
+                onClick = {},
+            ){
+                Icon(imageVector = Icons.Filled.AddCircle, contentDescription = "")
+            }
+            IconButton(
+                modifier = Modifier.weight(1f),
+                onClick = {},
+            ){
+                Icon(imageVector = Icons.Filled.MailOutline, contentDescription = "")
+            }
+            IconButton(
+                modifier = Modifier.weight(1f),
+                onClick = {},
+            ){
+                Icon(imageVector = Icons.Filled.Share, contentDescription = "")
+            }
+        }
     }
 }
 
