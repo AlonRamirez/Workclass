@@ -583,12 +583,12 @@ fun Adaptive(){
         PostCardModel(1,"Title 1","Text 1", R.drawable.logoandroid),
         PostCardModel(2,"Title 2","Text 2", R.drawable.logoandroid),
         PostCardModel(3,"Title 3","Text 3", R.drawable.logoandroid),
-        PostCardModel(4,"Title 3","Text 3", R.drawable.logoandroid),
-        PostCardModel(5,"Title 3","Text 3", R.drawable.logoandroid),
-        PostCardModel(6,"Title 3","Text 3", R.drawable.logoandroid),
-        PostCardModel(7,"Title 3","Text 3", R.drawable.logoandroid),
-        PostCardModel(8,"Title 3","Text 3", R.drawable.logoandroid),
-        PostCardModel(9,"Title 3","Text 3", R.drawable.logoandroid)
+        PostCardModel(4,"Title 4","Text 4", R.drawable.logoandroid),
+        PostCardModel(5,"Title 5","Text 5", R.drawable.logoandroid),
+        PostCardModel(6,"Title 6","Text 6", R.drawable.logoandroid),
+        PostCardModel(7,"Title 7","Text 7", R.drawable.logoandroid),
+        PostCardModel(8,"Title 8","Text 8", R.drawable.logoandroid),
+        PostCardModel(9,"Title 9","Text 9", R.drawable.logoandroid)
     )
     if(width == WindowWidthSizeClass.COMPACT){
         LazyColumn (
