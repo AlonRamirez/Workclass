@@ -56,6 +56,7 @@ import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -84,6 +85,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.window.core.layout.WindowHeightSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import com.example.workclass.R
 import com.example.workclass.data.model.MenuModel
 import com.example.workclass.data.model.PostCardModel
@@ -464,8 +467,8 @@ fun Bars(){
     ){
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Color.Black,
-                titleContentColor = Color.White
+                containerColor = MaterialTheme.colorScheme.primary,
+                titleContentColor = MaterialTheme.colorScheme.secondary
             ),
             title = { Text("Screen title") },
             actions = {
@@ -521,8 +524,8 @@ fun Bars(){
         }
 
         BottomAppBar(
-            containerColor = Color.Green,
-            contentColor = Color.Magenta
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.secondary
         ) {
             IconButton(
                 modifier = Modifier.weight(1f),
@@ -571,10 +574,41 @@ fun Adaptive(){
     // Medium Height >= 480 dp < 900 dp Tablet Landscape Phone Portrait
     // Expanded height >= 900 dp tablet Portrait
 
-    Column(){
+    /*Column(){
         Text(windowSize.toString())
         Text(height.toString())
         Text(width.toString())
+    }*/
+    val arrayPost = arrayOf(
+        PostCardModel(1,"Title 1","Text 1", R.drawable.logoandroid),
+        PostCardModel(2,"Title 2","Text 2", R.drawable.logoandroid),
+        PostCardModel(3,"Title 3","Text 3", R.drawable.logoandroid),
+        PostCardModel(4,"Title 3","Text 3", R.drawable.logoandroid),
+        PostCardModel(5,"Title 3","Text 3", R.drawable.logoandroid),
+        PostCardModel(6,"Title 3","Text 3", R.drawable.logoandroid),
+        PostCardModel(7,"Title 3","Text 3", R.drawable.logoandroid),
+        PostCardModel(8,"Title 3","Text 3", R.drawable.logoandroid),
+        PostCardModel(9,"Title 3","Text 3", R.drawable.logoandroid)
+    )
+    if(width == WindowWidthSizeClass.COMPACT){
+        LazyColumn (
+            modifier = Modifier
+                .fillMaxSize()
+        ){
+            items(arrayPost){ item ->
+                PostCardComponent(item.id,item.title,item.text,item.image)
+            }
+        }
+    }else if (height == WindowHeightSizeClass.COMPACT)
+    {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+        ){
+            items(arrayPost){ item ->
+                PostCardCompactComponent(item.id,item.title,item.text,item.image)
+            }
+        }
     }
 }
 
